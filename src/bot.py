@@ -10,10 +10,10 @@ import os
 from datetime import datetime
 import asyncio
 
-from database.db_manager import DatabaseManager
-from analytics.health_analyzer import HealthAnalyzer
-from analytics.channel_analyzer import ChannelAnalyzer
-from analytics.contributor_analyzer import ContributorAnalyzer
+from .database.db_manager import DatabaseManager
+from .analytics.health_analyzer import HealthAnalyzer
+from .analytics.channel_analyzer import ChannelAnalyzer
+from .analytics.contributor_analyzer import ContributorAnalyzer
 
 
 
