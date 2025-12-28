@@ -19,8 +19,8 @@ from .analytics.contributor_analyzer import ContributorAnalyzer
 
 # Bot configuration
 intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True
+# intents.message_content = True  # Disabled - requires privileged intent
+# intents.members = True          # Disabled - requires privileged intent
 intents.guilds = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -68,22 +68,28 @@ async def on_message(message):
 
 @bot.event
 async def on_member_join(member):
-    """Track member joins"""
-    await db_manager.log_member_join(
-        guild_id=member.guild.id,
-        user_id=member.id,
-        timestamp=datetime.utcnow()
-    )
+    """Track member joins - requires Server Members Intent"""
+    try:
+        await db_manager.log_member_join(
+            guild_id=member.guild.id,
+            user_id=member.id,
+            timestamp=datetime.utcnow()
+        )
+    except Exception as e:
+        print(f"⚠️ Could not log member join (requires Server Members Intent): {e}")
 
 
 @bot.event
 async def on_member_remove(member):
-    """Track member leaves"""
-    await db_manager.log_member_leave(
-        guild_id=member.guild.id,
-        user_id=member.id,
-        timestamp=datetime.utcnow()
-    )
+    """Track member leaves - requires Server Members Intent"""
+    try:
+        await db_manager.log_member_leave(
+            guild_id=member.guild.id,
+            user_id=member.id,
+            timestamp=datetime.utcnow()
+        )
+    except Exception as e:
+        print(f"⚠️ Could not log member leave (requires Server Members Intent): {e}")
 
 
 @bot.event
