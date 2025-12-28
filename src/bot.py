@@ -10,10 +10,11 @@ import os
 from datetime import datetime
 import asyncio
 
-from database.db_manager import DatabaseManager
-from analytics.health_analyzer import HealthAnalyzer
-from analytics.channel_analyzer import ChannelAnalyzer
-from analytics.contributor_analyzer import ContributorAnalyzer
+from src.database.db_manager import DatabaseManager
+from src.analytics.health_analyzer import HealthAnalyzer
+from src.analytics.channel_analyzer import ChannelAnalyzer
+from src.analytics.contributor_analyzer import ContributorAnalyzer
+
 
 # Bot configuration
 intents = discord.Intents.default()
